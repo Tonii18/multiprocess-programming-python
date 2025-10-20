@@ -6,5 +6,5 @@ events = data.getEvents()
 ips = data.getIps()
 messages = data.getMessages()
 
-line = (dates + times + events + ips + messages)
+line = (str(dates) + ' : ' + str(times) + ' : ' + str(events) + ' : ' + str(ips) + ' : ' + str(messages))
 print(line)
