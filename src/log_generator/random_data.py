@@ -14,33 +14,33 @@ def generateDates():
         month = random.randint(1, 13)
         day = random.randint(1, 32)
 
-        full_date = str(year) + ' - ' + str(month) + ' - ' + str(day)
+        full_date = str(year) + '-' + str(month) + '-' + str(day)
         dates.append(full_date)
     
     return dates
 
 
 def generateTimes():
-    times = []
+    times_array = []
     
     for i in range(times):
-        hours = random.randint(25)
-        minutes = random.randint(60)
-        seconds = random.randint(60)
+        hours = random.randint(0,25)
+        minutes = random.randint(0,60)
+        seconds = random.randint(0,60)
 
         if hours < 10:
-            hours = '0' + hours
+            hours = '0' + str(hours)
         
         if minutes < 10:
-            minutes = '0' + minutes
+            minutes = '0' + str(minutes)
 
         if seconds < 10:
-            seconds = '0' + seconds
+            seconds = '0' + str(seconds)
 
         full_hour = str(hours) + ':' + str(minutes) + ':' + str(seconds)
-        times.append(full_hour)
+        times_array.append(full_hour)
 
-    return times
+    return times_array
 
 
 def generateEvents():
@@ -94,7 +94,7 @@ def generateMessages():
     return full_messages
 
 dates = generateDates()
-times = generateTimes()
+times_arrays = generateTimes()
 events = generateEvents()
 ips = generateIps()
 messages = generateMessages()
@@ -106,8 +106,8 @@ def getDates():
     return dates[index]
 
 def getTimes():
-    index = random.randint(0,len(times) - 1)
-    return times[index]
+    index = random.randint(0,len(times_arrays) - 1)
+    return times_arrays[index]
 
 def getEvents():
     index = random.randint(0,len(events) - 1)
