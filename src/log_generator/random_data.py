@@ -1,4 +1,4 @@
-"""This file contains random data which will be used for generating logs files"""
+# This file contains random data which will be used for generating logs files
 
 import random
 
