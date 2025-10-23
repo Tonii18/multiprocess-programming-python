@@ -9,6 +9,7 @@ class App:
         print("Initialising aaplication")
 
     def run(self):
+        # TODO 1: Ask for the file´s lines number
         file_name = input("Enter the file name: ")
         print(f"Creating file: {file_name}")
         gen.create_file(file_name)
