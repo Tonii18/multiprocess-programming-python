@@ -1,18 +1,20 @@
-# main.py
+# App entry point
+
+import src.log_generator.generator as gen
+import time
+
 class App:
     
-    import src.log_generator.generator as gen
-    
     def __init__(self):
-        print("Inicializando la aplicación...")
+        print("Initialising aaplication")
 
     def run(self):
         file_name = input("Enter the file name: ")
-        print(f"Creando archivo: {file_name}")
-        # Aquí podrías llamar a tus módulos, por ejemplo:
+        print(f"Creating file: {file_name}")
         gen.create_file(file_name)
+        print('File created succesfully!')
 
 
 if __name__ == "__main__":
-    app = App()   # se crea la instancia
-    app.run()     # se ejecuta el programa
+    app = App()   # Create an instance
+    app.run()     # Run the program

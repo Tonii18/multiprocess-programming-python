@@ -14,6 +14,12 @@ def generateDates():
         month = random.randint(1, 13)
         day = random.randint(1, 32)
 
+        if month < 10:
+            month = '0' + str(month)
+
+        if day < 10:
+            day = '0' + str(day)
+
         full_date = str(year) + '-' + str(month) + '-' + str(day)
         dates.append(full_date)
     
