@@ -31,3 +31,5 @@ def create_file(name):
         file.write(date + ';' + time + ';' + event + ';' + ip + ';' + message + '\n')
 
     file.close()
+
+    return directory + '/' + name + '_' + str((getSize(directory))) + '.txt'
