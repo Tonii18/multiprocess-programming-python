@@ -43,6 +43,14 @@ class App:
         result = messages_analysis(example_fragment)
         print(result)
 
+        print('==========================================')
+
+        # TODO: Remove later, just for tests
+
+        partial_results = analyzer.analyze_parallel()
+        for i, res in enumerate(partial_results):
+            print(f"Fragment {i+1} partial result: {res}")
+
 
 
 

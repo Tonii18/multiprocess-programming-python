@@ -1,5 +1,5 @@
 import os
-from multiprocessing import pool
+from multiprocessing import Pool
 from src.log_analyzer.extra_functions import messages_analysis
 
 class LogAnalyzer:
@@ -69,17 +69,20 @@ class LogAnalyzer:
             "last_fragment_lines": len(fragments[-1])
         }
     
-    # 3. analyze_parallel() ->
+    # 3. analyze_parallel() -> It creates 4 process by using Pool from multiproccesing
 
     def analyze_parallel(self):
         processes = self.processes
-        with pool(processes) as pool:
+        with Pool(processes) as pool:
             results = pool.map(messages_analysis, self.fragments)
         
         self.partial_results = results
         return self.partial_results
 
+    # 4. combine_results() -> It takes each dictionary with the counters and it will calculate final measures
+
     def combine_results(self):
+        
         raise;
 
     def show_report(self):

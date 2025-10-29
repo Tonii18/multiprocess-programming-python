@@ -9,6 +9,4 @@ def messages_analysis(fragment):
         else:
             messages_map[level] = 1
 
-
-    print(messages_map)
     return messages_map
