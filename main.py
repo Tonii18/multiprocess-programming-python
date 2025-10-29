@@ -1,6 +1,7 @@
 # App entry point
 
 from src.log_analyzer.analyzer import LogAnalyzer
+from src.log_analyzer.extra_functions import messages_analysis
 import src.log_generator.generator as gen
 import time
 
@@ -13,6 +14,7 @@ class App:
 
     def run(self):
         # TODO 1: Ask for the file´s lines number
+
         file_name = input("Enter the file name: ")
         print(f"Creating file: {file_name}")
         full_name = gen.create_file(file_name)
@@ -21,12 +23,30 @@ class App:
         analyzer = LogAnalyzer(full_name)
         summary = analyzer.load_file()
 
-        # TODO: Debugging the input, delete later
+        split_summary = analyzer.split_work()
+        print(split_summary)
 
-        print(f"\n✅ Log file loaded successfully!")
-        print(f"Path: {summary['path']}")
-        print(f"Total lines loaded: {summary['loaded']}")
-        print(f"Example line: {analyzer.lines[0] if analyzer.lines else 'No lines loaded'}")
+        # TODO: Remove later this loop, just for tests
+
+        print("\n--- Fragment check ---")
+        for i, fragment in enumerate(analyzer.fragments):
+            print(f"Fragment {i+1}: {len(fragment)} lines")
+            print("  Example lines:")
+            for example in fragment[:3]:
+                print(f"    {example}")
+                print("  ...")
+        print("----------------------\n")
+
+        # TODO: Remove later, just for tests
+
+        example_fragment = analyzer.fragments[0]
+        result = messages_analysis(example_fragment)
+        print(result)
+
+
+
+
+        
 
 
 

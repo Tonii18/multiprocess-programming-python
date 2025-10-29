@@ -1,4 +1,6 @@
 import os
+from multiprocessing import pool
+from src.log_analyzer.extra_functions import messages_analysis
 
 class LogAnalyzer:
 
@@ -38,13 +40,44 @@ class LogAnalyzer:
 
         return {'path': file_path, 'loaded': loaded}
     
-    # 2. split_work() ->
+    # 2. split_work() -> It divide the log file content in equals parts
 
-    def split_work(self, lines_per_fragment):
-        raise;
+    def split_work(self):
+        total_lines = len(self.lines)
+        processes = self.processes
+        fragment_size = total_lines // processes
+        fragments = []
+
+        start = 0
+
+        # This loop calculate de final index of current fragment ('end')
+
+        for i in range(processes):
+            end = start + fragment_size
+            if i == processes - 1:
+                fragments.append(self.lines[start:])
+            else:
+                fragments.append(self.lines[start:end])
+            start = end
+
+        self.fragments = fragments
+
+        return {
+            "total_lines": total_lines,
+            "fragments": len(fragments),
+            "lines_per_fragment": fragment_size,
+            "last_fragment_lines": len(fragments[-1])
+        }
+    
+    # 3. analyze_parallel() ->
 
     def analyze_parallel(self):
-        raise;
+        processes = self.processes
+        with pool(processes) as pool:
+            results = pool.map(messages_analysis, self.fragments)
+        
+        self.partial_results = results
+        return self.partial_results
 
     def combine_results(self):
         raise;
