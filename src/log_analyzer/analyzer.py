@@ -132,19 +132,19 @@ class LogAnalyzer:
     # 5. run_analysis() -> In this function, we run the whole process so that we have less code in main.py
 
     def run_analysis(self):
-        print('\n[1/4] - Loading file...')
+        print('\n[1/4] - Cargando fichero...')
         summary = self.load_file()
 
-        print('\n[2/4] - Splitting work in fragments...')
+        print('\n[2/4] - Dividiendo trabajo en fragmentos...')
         split_summary = self.split_work()
 
-        print('\n[3/4] - Fragments parallel analysis...')
+        print('\n[3/4] - Análisis paralelo de cada fragmento...')
         self.analyze_parallel()
 
-        print('\n[4/4] - Combining final results...')
+        print('\n[4/4] - Combinando resultados...')
         results = self.combine_results()
 
-        print('\nAnalysis completed succesfully!\n')
+        print('\nAnálisis completado con éxito!\n')
         
         return results
 
