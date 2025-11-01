@@ -79,11 +79,28 @@ class LogAnalyzer:
         self.partial_results = results
         return self.partial_results
 
-    # 4. combine_results() -> It takes each dictionary with the counters and it will calculate final measures
+    # 4. combine_results() -> It iterate over the self.partial_results dictionary lists, sum all values in a only one map called combined
 
     def combine_results(self):
+        combined = {}
+        total_lines = 0
+
+        for partial in self.partial_results:
+            for key,value in partial.items():
+                combined[key] = combined.get(key, 0) + value
+                total_lines += value
+
+        percentages = {}
+        for key,value in combined.items():
+            percentages[key] = round((value / total_lines) * 100, 2)
+
+        self.results = {
+            "total_lines": total_lines,
+            "counts": combined,
+            "percentages": percentages
+        }
         
-        raise;
+        return self.results
 
     def show_report(self):
         raise;

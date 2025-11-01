@@ -51,6 +51,12 @@ class App:
         for i, res in enumerate(partial_results):
             print(f"Fragment {i+1} partial result: {res}")
 
+        # TODO: Remove later, just for tests
+
+        final_results = analyzer.combine_results()
+        print("\n--- Final Results ---")
+        print(final_results)
+
 
 
 
