@@ -13,56 +13,53 @@ class App:
         print("Initialising aaplication")
 
     def run(self):
-        # TODO 1: Ask for the file´s lines number
+
+        # TODO:
+        """
+        1. Create a results folder and export analysis data to a json file X
+        2. Monitoring results by using psutil
+        3. Create feature to analyze a named file entered by the user
+        4. Clean main.py
+        """
+
+        # 1. Enter file name
 
         file_name = input("Enter the file name: ")
         print(f"Creating file: {file_name}")
         full_name = gen.create_file(file_name)
         print('File created succesfully!')
 
+        # 2. Create analyzer instance and run full analysis
+
         analyzer = LogAnalyzer(full_name)
-        summary = analyzer.load_file()
+        final_results = analyzer.run_analysis()
 
-        split_summary = analyzer.split_work()
-        print(split_summary)
+        # 3. Show resume
 
-        # TODO: Remove later this loop, just for tests
+        print("--- Final Results ---")
+        print("Total lines analyzed:", {final_results['total_lines']})
+        print("Message types count:", final_results["messages"])
+        print("\nTop 10 active IPs:")
+        for ip, count in final_results["top_ips"]:
+            print(f"{ip}: {count} times")
 
-        print("\n--- Fragment check ---")
-        for i, fragment in enumerate(analyzer.fragments):
-            print(f"Fragment {i+1}: {len(fragment)} lines")
-            print("  Example lines:")
-            for example in fragment[:3]:
-                print(f"    {example}")
-                print("  ...")
-        print("----------------------\n")
+        print("\nErrors by hour:")
+        for hour, count in final_results["errors_by_hour"].items():
+            print(f"{hour}:00 -> {count} errors")
 
-        # TODO: Remove later, just for tests
+        print("\n==============================")
+        print("Analysis completed successfully ✅")
 
-        example_fragment = analyzer.fragments[0]
-        result = messages_analysis(example_fragment)
-        print(result)
+        # 4. Save results
 
-        print('==========================================')
-
-        # TODO: Remove later, just for tests
-
-        partial_results = analyzer.analyze_parallel()
-        for i, res in enumerate(partial_results):
-            print(f"Fragment {i+1} partial result: {res}")
-
-        # TODO: Remove later, just for tests
-
-        final_results = analyzer.combine_results()
-        print("\n--- Final Results ---")
-        print(final_results)
+        try:
+            report_path = analyzer.save_results(out_dir="results")
+            print(f"\nSaved analysis report to: {report_path}")
+        except Exception as e:
+            print("Warning: could not save results:", e)
 
 
-
-
-        
-
-
+# Run main
 
 if __name__ == "__main__":
     app = App()   # Create an instance

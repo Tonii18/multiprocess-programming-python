@@ -30,9 +30,9 @@ def generateTimes():
     times_array = []
     
     for i in range(times):
-        hours = random.randint(0,25)
-        minutes = random.randint(0,60)
-        seconds = random.randint(0,60)
+        hours = random.randint(0,23)
+        minutes = random.randint(0,59)
+        seconds = random.randint(0,59)
 
         if hours < 10:
             hours = '0' + str(hours)
