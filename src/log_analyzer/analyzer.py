@@ -129,9 +129,6 @@ class LogAnalyzer:
         
         return self.results
 
-    def show_report(self):
-        raise;
-
     # 5. run_analysis() -> In this function, we run the whole process so that we have less code in main.py
 
     def run_analysis(self):
